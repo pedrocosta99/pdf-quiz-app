@@ -1,10 +1,5 @@
-import { create } from 'zustand';
-
-type QuizQuestion = {
-  question: string;
-  options: string[];
-  answerIndex: number;
-};
+import { Question } from "@/types";
+import { create } from "zustand";
 
 type MainStore = {
   text: string;
@@ -13,20 +8,17 @@ type MainStore = {
   questionCount: number;
   setQuestionCount: (n: number) => void;
 
-  questions: QuizQuestion[];
-  setQuestions: (q: QuizQuestion[]) => void;
+  questions: Question[];
+  setQuestions: (q: Question[]) => void;
 
   updateQuestionText: (index: number, text: string) => void;
   updateAnswerText: (qindex: number, aIndex: number, value: string) => void;
 
-  answers: Record<number, string>;
-  setAnswer: (index: number, value: string) => void;
-
-  reset: () => void;
+  setAnswerIndex: (qIndex: number, answerIndex: number) => void;
 };
 
 export const useStore = create<MainStore>((set) => ({
-  text: '',
+  text: "",
   setText: (pdf) => set({ text: pdf }),
 
   questionCount: 10,
@@ -51,16 +43,13 @@ export const useStore = create<MainStore>((set) => ({
       return { questions: updated };
     }),
 
-  answers: {},
-  setAnswer: (index, value) =>
-    set((state) => ({
-      answers: { ...state.answers, [index]: value },
-    })),
-
-  reset: () =>
-    set({
-      text: '',
-      questions: [],
-      answers: {},
+  setAnswerIndex: (qIndex, answerIndex) =>
+    set((state) => {
+      const updated = [...state.questions];
+      updated[qIndex] = {
+        ...updated[qIndex],
+        answerIndex,
+      };
+      return { questions: updated };
     }),
 }));
