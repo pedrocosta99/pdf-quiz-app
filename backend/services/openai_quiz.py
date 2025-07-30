@@ -1,4 +1,4 @@
-import openai
+from openai import OpenAI
 import os
 import json
 from models import QuizQuestion
@@ -7,7 +7,8 @@ import os
 
 load_dotenv()
 
-openai.api_key = os.getenv("OPENAI_API_KEY")
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+
 
 PROMPT_TEMPLATE = """
 From the text below, generate {num_questions} multiple choice questions with 4 alternatives each. Point out the correct answer in each case.
@@ -29,9 +30,9 @@ Answer format JSON:
 def generate_quiz_from_text(text: str, num_questions: int = 10) -> list[QuizQuestion]:
     prompt = PROMPT_TEMPLATE.format(text=text, num_questions=num_questions)
 
-    response = openai.ChatCompletion.create(
-        model="gpt-4",
-        messages=[{"role": "user", "content": prompt}],
+    response = client.responses.create(
+        model="gpt-3.5-turbo",
+        input=PROMPT_TEMPLATE,
         temperature=0.7,
     )
 
