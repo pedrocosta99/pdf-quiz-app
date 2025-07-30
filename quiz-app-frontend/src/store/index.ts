@@ -2,6 +2,14 @@ import { Question } from "@/types";
 import { create } from "zustand";
 import { mockText, mockQuestions } from "@/mock";
 
+const initialValue = {
+  questionCount: 5,
+  // text: mockText,
+  // questions: mockQuestions,
+  text: '',
+  questions: [],
+}
+
 type MainStore = {
   text: string;
   setText: (pdf: string) => void;
@@ -19,15 +27,13 @@ type MainStore = {
 };
 
 export const useStore = create<MainStore>((set) => ({
-  // text: "",
-  text: mockText,
+  text: initialValue.text,
   setText: (pdf) => set({ text: pdf }),
 
   questionCount: 10,
   setQuestionCount: (n) => set({ questionCount: n }),
 
-  // questions: [],
-  questions: mockQuestions,
+  questions: initialValue.questions,
   setQuestions: (q) => set({ questions: q }),
 
   updateQuestionText: (index, text) =>

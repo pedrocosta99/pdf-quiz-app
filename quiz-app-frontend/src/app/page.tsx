@@ -2,11 +2,12 @@
 import { useRouter } from "next/navigation";
 import { useUploadPdf } from "../hooks/useUploadPdf";
 import { useStore } from "../store/index";
+import { mockQuestions, mockText } from "@/mock";
 
 export default function UploadPage() {
   const { mutate, isPending, isError, error } = useUploadPdf();
   const router = useRouter();
-  const { setText, questionCount, setQuestionCount } = useStore();
+  const { setText, questionCount, setQuestionCount, setQuestions } = useStore();
 
 
 
@@ -26,7 +27,9 @@ export default function UploadPage() {
       mutate({file, questionCount}, {
         onSuccess: (data) => {
           setText(data.text);
-          router.push("/review");
+          // setText(mockText)
+          setQuestions(mockQuestions)
+          router.push("/quiz-editor");
         },
       });
     }
