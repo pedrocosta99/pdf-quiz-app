@@ -3,7 +3,7 @@ import { create } from 'zustand';
 type QuizQuestion = {
   question: string;
   options: string[];
-  answer: string;
+  answerIndex: number;
 };
 
 type MainStore = {
@@ -15,6 +15,9 @@ type MainStore = {
 
   questions: QuizQuestion[];
   setQuestions: (q: QuizQuestion[]) => void;
+
+  updateQuestionText: (index: number, text: string) => void;
+  updateAnswerText: (qindex: number, aIndex: number, value: string) => void;
 
   answers: Record<number, string>;
   setAnswer: (index: number, value: string) => void;
@@ -31,6 +34,22 @@ export const useStore = create<MainStore>((set) => ({
 
   questions: [],
   setQuestions: (q) => set({ questions: q }),
+
+  updateQuestionText: (index, text) =>
+    set((state) => {
+      const updated = [...state.questions];
+      updated[index] = { ...updated[index], question: text };
+      return { questions: updated };
+    }),
+
+  updateAnswerText: (qIndex, aIndex, value) =>
+    set((state) => {
+      const updated = [...state.questions];
+      const newAnswers = [...updated[qIndex].options];
+      newAnswers[aIndex] = value;
+      updated[qIndex] = { ...updated[qIndex], options: newAnswers };
+      return { questions: updated };
+    }),
 
   answers: {},
   setAnswer: (index, value) =>
