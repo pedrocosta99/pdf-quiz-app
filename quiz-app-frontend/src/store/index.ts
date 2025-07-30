@@ -3,7 +3,7 @@ import { create } from "zustand";
 import { mockText, mockQuestions } from "@/mock";
 
 const initialValue = {
-  questionCount: 5,
+  questionCount: 3,
   // text: mockText,
   // questions: mockQuestions,
   text: '',
@@ -30,7 +30,7 @@ export const useStore = create<MainStore>((set) => ({
   text: initialValue.text,
   setText: (pdf) => set({ text: pdf }),
 
-  questionCount: 10,
+  questionCount: initialValue.questionCount,
   setQuestionCount: (n) => set({ questionCount: n }),
 
   questions: initialValue.questions,

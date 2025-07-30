@@ -2,8 +2,12 @@ import openai
 import os
 import json
 from models import QuizQuestion
+from dotenv import load_dotenv
+import os
 
-openai.api_key = os.getenv("OPENAI_API_KEY")  # Update your env var name
+load_dotenv()
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 PROMPT_TEMPLATE = """
 From the text below, generate {num_questions} multiple choice questions with 4 alternatives each. Point out the correct answer in each case.
