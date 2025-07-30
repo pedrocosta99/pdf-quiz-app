@@ -2,20 +2,13 @@
 import { useRouter } from "next/navigation";
 import { useUploadPdf } from "../hooks/useUploadPdf";
 import { useStore } from "../store/index";
-import { useEffect } from "react";
-import { mockQuestions, mockText } from "@/mock";
 
 export default function UploadPage() {
   const { mutate, isPending, isError, error } = useUploadPdf();
   const router = useRouter();
-  const { setText, questionCount, setQuestionCount, setQuestions } = useStore();
+  const { setText, questionCount, setQuestionCount } = useStore();
 
-  useEffect(() => { 
-    // Reset state when navigating to this page
-    setText(mockText);
-    setQuestions(mockQuestions);
-    setQuestionCount(4);
-   }, [])
+
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
