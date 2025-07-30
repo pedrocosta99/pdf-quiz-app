@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useRouter } from "next/navigation";
 import { useUploadPdf } from "../hooks/useUploadPdf";
 import { useStore } from "../store/index";
@@ -7,6 +7,8 @@ export default function UploadPage() {
   const { mutate, isPending, isError, error } = useUploadPdf();
   const router = useRouter();
   const setText = useStore((state) => state.setText);
+  const questionCount = useStore((s) => s.questionCount);
+  const setQuestionCount = useStore((s) => s.setQuestionCount);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -21,21 +23,33 @@ export default function UploadPage() {
       return;
     }
     if (file) {
-      mutate(file, {
+      mutate({file, questionCount}, {
         onSuccess: (data) => {
           setText(data.text);
-          router.push('/review')
+          router.push("/review");
         },
       });
     }
   };
 
   return (
-   <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white shadow-md rounded-xl p-6 space-y-6">
         <h1 className="text-2xl font-semibold text-gray-800 text-center">
           Enviar PDF para Transcrição
         </h1>
+
+        <label className="block text-sm font-medium text-gray-700 mb-1">
+          Quantidade de perguntas (máx. 10):
+        </label>
+        <input
+          type="number"
+          min={1}
+          max={10}
+          value={questionCount}
+          onChange={(e) => setQuestionCount(Number(e.target.value))}
+          className="w-full rounded border px-3 py-2 text-sm"
+        />
 
         <label className="block">
           <span className="block text-sm font-medium text-gray-700 mb-2">
@@ -56,7 +70,9 @@ export default function UploadPage() {
         </label>
 
         {isPending && (
-          <p className="text-sm text-gray-600 text-center">⏳ Processando PDF...</p>
+          <p className="text-sm text-gray-600 text-center">
+            ⏳ Processando PDF...
+          </p>
         )}
 
         {isError && (
@@ -67,4 +83,4 @@ export default function UploadPage() {
       </div>
     </main>
   );
-};
+}

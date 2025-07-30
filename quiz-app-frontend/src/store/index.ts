@@ -6,9 +6,12 @@ type QuizQuestion = {
   answer: string;
 };
 
-type AppStore = {
+type MainStore = {
   text: string;
   setText: (pdf: string) => void;
+
+  questionCount: number;
+  setQuestionCount: (n: number) => void;
 
   questions: QuizQuestion[];
   setQuestions: (q: QuizQuestion[]) => void;
@@ -19,9 +22,12 @@ type AppStore = {
   reset: () => void;
 };
 
-export const useStore = create<AppStore>((set) => ({
+export const useStore = create<MainStore>((set) => ({
   text: '',
   setText: (pdf) => set({ text: pdf }),
+
+  questionCount: 10,
+  setQuestionCount: (n) => set({ questionCount: n }),
 
   questions: [],
   setQuestions: (q) => set({ questions: q }),
