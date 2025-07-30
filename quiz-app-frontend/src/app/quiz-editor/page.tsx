@@ -1,14 +1,20 @@
 "use client";
 
+import { mockQuestions, mockText } from "@/mock";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function ReviewPage() {
   const questions = useStore((s) => s.questions);
-  const updateQuestionText = useStore((s) => s.updateQuestionText);
-  const updateAnswerText = useStore((s) => s.updateAnswerText);
-  const setQuestions = useStore((s) => s.setQuestions);
+  const { updateQuestionText, updateAnswerText, setQuestions, setText } = useStore();
   const router = useRouter();
+
+  useEffect(() => { 
+      // Reset state when navigating to this page
+      setText(mockText);
+      setQuestions(mockQuestions);
+     }, [])
 
   const handleContinue = () => {
     router.push("/quiz");
