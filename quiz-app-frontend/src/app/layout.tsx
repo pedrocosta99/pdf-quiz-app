@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryProvider } from "@/providers/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "PDF quiz",
   description: "Generate a quiz from a PDF!",
 };
 
-const queryClient = new QueryClient();
 
 export default function RootLayout({
   children,
@@ -17,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <QueryClientProvider client={queryClient}>
+        <ReactQueryProvider>
           {children}
-        </QueryClientProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );
