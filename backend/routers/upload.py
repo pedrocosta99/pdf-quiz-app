@@ -1,4 +1,4 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException
+from fastapi import APIRouter, UploadFile, File, HTTPException, Query
 from services.pdf_reader import extract_text_from_pdf
 from models import TextResponse
 import uuid
@@ -8,7 +8,10 @@ import shutil
 router = APIRouter()
 
 @router.post("/transcribe-pdf", response_model=TextResponse)
-async def transcribe_pdf(file: UploadFile = File(...)):
+async def transcribe_pdf(
+    file: UploadFile = File(...),
+    number_of_questions: int = Query(5, ge=1, le=10, description="Number of questions to generate (1-10)")
+):
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="File should be a .pdf")
 
@@ -19,6 +22,8 @@ async def transcribe_pdf(file: UploadFile = File(...)):
             shutil.copyfileobj(file.file, buffer)
 
         text = extract_text_from_pdf(temp_filename)
+
+        # You can return number_of_questions in the response if needed
         return TextResponse(text=text)
 
     except Exception as e:

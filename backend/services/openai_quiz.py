@@ -1,11 +1,12 @@
 import openai
 import os
+import json
 from models import QuizQuestion
 
-openai.api_key = os.getenv("TODO: resgatar minha key")
+openai.api_key = os.getenv("OPENAI_API_KEY")  # Update your env var name
 
 PROMPT_TEMPLATE = """
-From the text below, generate 10 multiple choice questions with 4 alternatives each. Point out the correct answer in each case.
+From the text below, generate {num_questions} multiple choice questions with 4 alternatives each. Point out the correct answer in each case.
 
 Text:
 "{text}"
@@ -21,8 +22,8 @@ Answer format JSON:
 ]
 """
 
-def generate_quiz_from_text(text: str) -> list[QuizQuestion]:
-    prompt = PROMPT_TEMPLATE.format(text=text)
+def generate_quiz_from_text(text: str, num_questions: int = 10) -> list[QuizQuestion]:
+    prompt = PROMPT_TEMPLATE.format(text=text, num_questions=num_questions)
 
     response = openai.ChatCompletion.create(
         model="gpt-4",
@@ -33,7 +34,8 @@ def generate_quiz_from_text(text: str) -> list[QuizQuestion]:
     content = response.choices[0].message.content.strip()
 
     try:
-        parsed = eval(content)  # json.loads ???? ou nao
+        # Use json.loads instead of eval for safety
+        parsed = json.loads(content)
         return [QuizQuestion(**q) for q in parsed]
     except Exception as e:
         raise ValueError(f"Error reading OpenAI API: {e}")
