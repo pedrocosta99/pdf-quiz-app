@@ -14,10 +14,12 @@ export const mockQuestions: Question[] = [
     question: 'What is the capital of Brazil?',
     options: ['São Paulo', 'Brasília', 'Rio de Janeiro', 'Salvador'],
     correctIndex: 1,
+    answerIndex: 2,
   },
   {
     question: 'When was Brasília founded?',
     options: ['1960', '1945', '1975', '1930'],
     correctIndex: 0,
+    answerIndex: 0,
   },
 ];
