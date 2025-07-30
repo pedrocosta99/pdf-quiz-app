@@ -19,7 +19,7 @@ type AppStore = {
   reset: () => void;
 };
 
-export const useAppStore = create<AppStore>((set) => ({
+export const useStore = create<AppStore>((set) => ({
   text: '',
   setText: (pdf) => set({ text: pdf }),
 
