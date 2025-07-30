@@ -1,10 +1,5 @@
 import Image from "next/image";
 
 export default function Upload() {
-  return (
-    <div className="">
-      Hello page
-      
-    </div>
-  );
+  return <div className="">Hello page</div>;
 }
