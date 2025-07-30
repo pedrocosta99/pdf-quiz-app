@@ -6,11 +6,13 @@ class TextResponse(BaseModel):
 
 class QuizRequest(BaseModel):
     text: str
+    questionCount: int
 
-class QuizQuestion(BaseModel):
+class Question(BaseModel):
     question: str
     options: List[str]
-    correctAnswer: str
+    correctIndex: int
+    correctIndex: int
 
 class QuizResponse(BaseModel):
-    questions: List[QuizQuestion]
+    questions: List[Question]
