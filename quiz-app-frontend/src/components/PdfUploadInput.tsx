@@ -1,4 +1,6 @@
 import React from "react";
+import PdfFolder from "@/assets/PdfFolder.png";
+import Image from "next/image";
 
 interface PdfUploadInputProps {
   isPendingPdf: boolean;
@@ -38,7 +40,13 @@ const PdfUploadInput: React.FC<PdfUploadInputProps> = ({
         </div>
       ) : (
         <div className="flex flex-col items-center text-center px-4">
-          <span className="mb-4 text-4xl">📄</span>
+          <Image
+            src={PdfFolder}
+            alt="Upload PDF"
+            width={64}
+            height={64}
+            className="mb-2"
+          />
           <p className="text-base font-medium">
             <strong>Click to upload</strong> or drag and drop files
           </p>
