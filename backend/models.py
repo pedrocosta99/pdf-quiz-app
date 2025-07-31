@@ -11,8 +11,7 @@ class QuizRequest(BaseModel):
 class Question(BaseModel):
     question: str
     options: List[str]
-    correctIndex: int
-    correctIndex: int
+    correctAnswerIndex: int
 
 class QuizResponse(BaseModel):
     questions: List[Question]
