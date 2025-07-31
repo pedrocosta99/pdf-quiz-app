@@ -1,8 +1,8 @@
 export type Question = {
   question: string;
   options: string[];
-  correctIndex: number;
-  answerIndex?: number;
+  correctAnswerIndex: number;
+  userAnswerIndex?: number;
 };
 
 export type QuizState = {

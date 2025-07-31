@@ -4,10 +4,10 @@ import { mockText, mockQuestions } from "@/mock";
 
 const initialValue = {
   questionCount: 3,
-  // text: mockText,
-  // questions: mockQuestions,
-  text: '',
-  questions: [],
+  text: mockText,
+  questions: mockQuestions,
+  // text: '',
+  // questions: [],
 }
 
 type MainStore = {
@@ -52,12 +52,12 @@ export const useStore = create<MainStore>((set) => ({
       return { questions: updated };
     }),
 
-  setAnswerIndex: (qIndex, answerIndex) =>
+  setAnswerIndex: (qIndex, userAnswerIndex) =>
     set((state) => {
       const updated = [...state.questions];
       updated[qIndex] = {
         ...updated[qIndex],
-        answerIndex,
+        userAnswerIndex,
       };
       return { questions: updated };
     }),
