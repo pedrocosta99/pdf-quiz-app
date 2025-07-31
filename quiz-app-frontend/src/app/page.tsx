@@ -1,17 +1,19 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useUploadPdf } from "../hooks/useUploadPdf";
+import { useGenerateQuiz } from "../hooks/useGenerateQuiz";
 import { useStore } from "../store/index";
-import { mockQuestions, mockText } from "@/mock";
+import { ChangeEvent, useState } from "react";
 
 export default function UploadPage() {
-  const { mutate, isPending, isError, error } = useUploadPdf();
+  const { mutateAsync: uploadPdf, isPending: isPendingPdf, isError, error } = useUploadPdf();
+  const { mutateAsync: generateQuiz, isPending: isPendingQuiz  } = useGenerateQuiz();
   const router = useRouter();
-  const { setText, questionCount, setQuestionCount, setQuestions } = useStore();
+  const { text, setText, questionCount, setQuestionCount, setQuestions } =
+    useStore();
+  const [localError, setLocalError] = useState<string | null>(null);
 
-
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.type !== "application/pdf") {
@@ -23,21 +25,38 @@ export default function UploadPage() {
       alert("O arquivo não pode ultrapassar 5MB.");
       return;
     }
-    if (file) {
-      mutate({file, questionCount}, {
-        onSuccess: (data) => {
-          setText(data.text);
-          // setText(mockText)
-          setQuestions(mockQuestions)
-          router.push("/quiz-editor");
-        },
-      });
+
+    try {
+      const uploadResult = await uploadPdf(file);
+      setText(uploadResult.text);
+
+      const quizQuestions = await generateQuiz({text, questionCount});
+      setQuestions(quizQuestions);
+
+      router.push("/quiz-editor");
+    } catch {
+      setLocalError("Erro ao processar o PDF.");
     }
+
+    // if (file) {
+    //   mutate(
+    //     { file, questionCount },
+    //     {
+    //       onSuccess: (data) => {
+    //         setText(data.text);
+    //         // setText(mockText)
+    //         setQuestions(mockQuestions);
+    //         router.push("/quiz-editor");
+    //       },
+    //     },
+    //   );
+    // }
   };
 
   return (
     <main className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
       <div className="max-w-md w-full bg-white shadow-md rounded-xl p-6 space-y-6">
+        {text}
         <h1 className="text-2xl font-semibold text-gray-800 text-center">
           Enviar PDF para Transcrição
         </h1>
@@ -62,7 +81,7 @@ export default function UploadPage() {
             type="file"
             accept="application/pdf"
             onChange={handleFileChange}
-            disabled={isPending}
+            disabled={isPendingPdf}
             className="block w-full text-sm text-gray-800
                        file:mr-4 file:py-2 file:px-4
                        file:rounded-full file:border-0
@@ -72,9 +91,15 @@ export default function UploadPage() {
           />
         </label>
 
-        {isPending && (
+        {isPendingPdf && (
           <p className="text-sm text-gray-600 text-center">
             ⏳ Processando PDF...
+          </p>
+        )}
+
+        {isPendingQuiz && (
+          <p className="text-sm text-gray-600 text-center">
+            ⏳ Gerando Quiz...
           </p>
         )}
 

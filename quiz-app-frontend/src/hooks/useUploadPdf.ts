@@ -1,10 +1,10 @@
 import { useMutation } from '@tanstack/react-query';
 
-const uploadPdf = async (file: File, questionCount: number): Promise<{ text: string }> => {
+const uploadPdf = async (file: File): Promise<{ text: string }> => {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch(`http://localhost:8000/transcribe-pdf?count=${questionCount}`, {
+  const response = await fetch(`http://localhost:8000/transcribe-pdf`, {
     method: 'POST',
     body: formData,
   });
@@ -19,7 +19,7 @@ const uploadPdf = async (file: File, questionCount: number): Promise<{ text: str
 
 export const useUploadPdf = () => {
   return useMutation({
-    mutationFn: ({ file, questionCount }: { file: File; questionCount: number }) =>
-      uploadPdf(file, questionCount),
+    mutationFn: (file: File) =>
+      uploadPdf(file),
   });
 };

@@ -4,13 +4,15 @@ import { Question } from '@/types';
 
 export function useGenerateQuiz() {
   return useMutation({
-    mutationFn: async (text: string): Promise<Question[]> => {
-    const res = await fetch('/api/generate-quiz', {
+    mutationFn: async ({ text, questionCount }: { text: string; questionCount: number }): Promise<Question[]> => {
+    const res = await fetch(`http://localhost:8000/generate-quiz`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: text,
+      body: JSON.stringify({ text, questionCount }),
     });
     const data = await res.json();
+    console.log(data, res )
+    await new Promise((resolve) => setTimeout(resolve, 7000)); // Simulate a delay
     return data.questions;
     },
   });
