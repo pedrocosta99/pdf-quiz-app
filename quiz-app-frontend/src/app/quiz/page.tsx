@@ -9,7 +9,7 @@ export default function QuizPage() {
 
 
   const q = questions[current];
-  const isAnswered = typeof q.correctAnswerIndex === 'number';
+  const isAnswered = typeof q.userAnswerIndex === 'number';
   const isCorrect = q.userAnswerIndex === q.correctAnswerIndex;
 
   const handleAnswer = (index: number) => {
