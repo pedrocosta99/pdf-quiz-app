@@ -9,8 +9,8 @@ export default function QuizPage() {
 
 
   const q = questions[current];
-  const isAnswered = typeof q.answerIndex === 'number';
-  const isCorrect = q.answerIndex === q.correctIndex;
+  const isAnswered = typeof q.correctAnswerIndex === 'number';
+  const isCorrect = q.userAnswerIndex === q.correctAnswerIndex;
 
   const handleAnswer = (index: number) => {
     if (!isAnswered) setAnswerIndex(current, index);
@@ -26,8 +26,8 @@ export default function QuizPage() {
 
         <div className="space-y-2">
           {q.options.map((opt, i) => {
-            const isSelected = q.answerIndex === i;
-            const isRightAnswer = q.correctIndex === i;
+            const isSelected = q.userAnswerIndex === i;
+            const isRightAnswer = q.userAnswerIndex === q.correctAnswerIndex;
 
             return (
               <button
@@ -55,7 +55,7 @@ export default function QuizPage() {
 
         {isAnswered && (
           <p className={`text-sm ${isCorrect ? 'text-green-600' : 'text-red-600'}`}>
-            {isCorrect ? 'Resposta correta!' : `Resposta incorreta. Resposta certa: "${q.options[q.correctIndex]}"`}
+            {isCorrect ? 'Resposta correta!' : `Resposta incorreta. Resposta certa: "${q.options[q.correctAnswerIndex]}"`}
           </p>
         )}
 
