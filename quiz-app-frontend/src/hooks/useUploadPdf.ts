@@ -4,6 +4,8 @@ const uploadPdf = async (file: File): Promise<{ text: string }> => {
   const formData = new FormData();
   formData.append('file', file);
 
+  await new Promise((resolve) => setTimeout(resolve, 3000)); // Simulate network delay
+
   const response = await fetch(`http://localhost:8000/transcribe-pdf`, {
     method: 'POST',
     body: formData,
