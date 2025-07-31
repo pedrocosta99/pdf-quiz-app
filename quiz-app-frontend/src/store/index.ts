@@ -1,13 +1,10 @@
 import { Question } from "@/types";
 import { create } from "zustand";
-import { mockText, mockQuestions } from "@/mock";
 
 const initialValue = {
   questionCount: 3,
-  text: mockText,
-  questions: mockQuestions,
-  // text: '',
-  // questions: [],
+  text: '',
+  questions: [],
 }
 
 type MainStore = {
