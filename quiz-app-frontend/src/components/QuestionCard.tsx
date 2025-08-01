@@ -1,10 +1,5 @@
+import { Question } from "@/types";
 import { AnswerOption } from "./AnswerOption";
-
-type Question = {
-  question: string;
-  options: string[];
-  userAnswerIndex?: number;
-};
 
 type QuestionCardProps = {
   index: number;
@@ -41,7 +36,7 @@ export function QuestionCard({
             key={j}
             index={j}
             value={opt}
-            isCorrect={questionData.userAnswerIndex === j}
+            isCorrect={questionData.correctAnswerIndex === j}
             onChange={(val) => updateAnswerText(j, val)}
             onMarkCorrect={() => markCorrect(j)}
           />

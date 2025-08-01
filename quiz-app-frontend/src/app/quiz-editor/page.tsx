@@ -36,7 +36,7 @@ export default function ReviewPage() {
             updateAnswerText={(j, newText) => updateAnswerText(i, j, newText)}
             markCorrect={(j) => {
               const updated = [...questions];
-              updated[i].userAnswerIndex = j;
+              updated[i].correctAnswerIndex = j;
               setQuestions(updated);
             }}
           />
