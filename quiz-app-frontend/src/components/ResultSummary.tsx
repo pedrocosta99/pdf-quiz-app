@@ -35,11 +35,11 @@ export function ResultSummary({
 
       <div className="flex items-center justify-center gap-2 px-8">
         <div
-          className={`flex-1 h-3 rounded-full bg-green-500 ${percentage == 0 ? 'hidden' : ''}`}
+          className={`flex h-3 rounded-full bg-green-500 ${percentage == 0 ? 'hidden' : ''}`}
           style={{ width: `${percentage}%` }}
         />
         <div
-          className={`flex-1 h-3 rounded-full bg-red-400 ${percentage == 100 ? 'hidden' : ''}`}
+          className={`flex h-3 rounded-full bg-red-400 ${percentage == 100 ? 'hidden' : ''}`}
           style={{ width: `${100 - percentage}%` }}
         />
       </div>

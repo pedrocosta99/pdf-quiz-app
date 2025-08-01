@@ -13,7 +13,7 @@ def generate_quiz_from_text(text: str, num_questions: int):
     response = client.responses.create(
       prompt={
         "id": "pmpt_688b70536f848195b51d13488b7fe2eb077d1b5b922b0d8a",
-        "version": "2",
+        "version": "3",
         "variables": {
           "questioncount": str(num_questions),
           "text": text

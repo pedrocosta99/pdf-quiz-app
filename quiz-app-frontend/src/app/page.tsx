@@ -22,12 +22,12 @@ export default function UploadPage() {
     const file = e.target.files?.[0];
     if (!file) return;
     if (file.type !== "application/pdf") {
-      setLocalError("Por favor, envie um arquivo PDF válido.");
+      setLocalError("Please, use a valid PDF file.");
       return;
     }
 
-    if (file.size > 2 * 1024 * 1024) {
-      setLocalError("O arquivo não pode ultrapassar 5MB.");
+    if (file.size > 5 * 1024 * 1024) {
+      setLocalError("PDF file is too large. Max size is 5MB.");
       return;
     }
 
@@ -40,7 +40,7 @@ export default function UploadPage() {
 
       router.push("/quiz-editor");
     } catch {
-      setLocalError("Erro ao processar o PDF. Tente novamente");
+      setLocalError("Error uploading PDF or generating quiz. Please try again.");
     }
   };
 
@@ -77,7 +77,7 @@ export default function UploadPage() {
       <div className="h-16 mt-4 w-full max-w-md">
         {localError ? (
           <div className="bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 shadow-sm text-center">
-            ❌ Erro: {localError}
+            ❌ {localError}
           </div>
         ) : null}
       </div>
