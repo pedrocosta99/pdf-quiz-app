@@ -10,7 +10,6 @@ router = APIRouter()
 @router.post("/transcribe-pdf", response_model=TextResponse)
 async def transcribe_pdf(
     file: UploadFile = File(...),
-    number_of_questions: int = Query(5, ge=1, le=10, description="Number of questions to generate (1-10)")
 ):
     if not file.filename.endswith(".pdf"):
         raise HTTPException(status_code=400, detail="File should be a .pdf")
@@ -23,7 +22,6 @@ async def transcribe_pdf(
 
         text = extract_text_from_pdf(temp_filename)
 
-        # You can return number_of_questions in the response if needed
         return TextResponse(text=text)
 
     except Exception as e:

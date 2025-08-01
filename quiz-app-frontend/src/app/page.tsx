@@ -10,9 +10,8 @@ import PurpleCurve from "@/assets/PurpleCurve.png";
 import Image from "next/image";
 
 export default function UploadPage() {
-  const { mutateAsync: uploadPdf, isPending: isPendingPdf } = useUploadPdf();
-  const { mutateAsync: generateQuiz, isPending: isPendingQuiz } =
-    useGenerateQuiz();
+  const { mutateAsync: uploadPdf } = useUploadPdf();
+  const { mutateAsync: generateQuiz } = useGenerateQuiz();
   const router = useRouter();
   const { text, setText, questionCount, setQuestionCount, setQuestions } =
     useStore();
@@ -40,7 +39,9 @@ export default function UploadPage() {
 
       router.push("/quiz-editor");
     } catch {
-      setLocalError("Error uploading PDF or generating quiz. Please try again.");
+      setLocalError(
+        "Error uploading PDF or generating quiz. Please try again.",
+      );
     }
   };
 
@@ -62,11 +63,7 @@ export default function UploadPage() {
       </section>
 
       <div className="max-w-md w-full bg-white shadow-md rounded-xl p-6 space-y-6">
-        <PdfUploadInput
-          isPendingPdf={isPendingPdf}
-          isPendingQuiz={isPendingQuiz}
-          handleFileChange={handleFileChange}
-        />
+        <PdfUploadInput handleFileChange={handleFileChange} />
 
         <QuestionCountInput
           questionCount={questionCount}

@@ -1,18 +1,19 @@
 import React from "react";
 import PdfFolder from "@/assets/PdfFolder.png";
 import Image from "next/image";
+import { useGenerateQuiz } from "@/hooks/useGenerateQuiz";
+import { useUploadPdf } from "@/hooks/useUploadPdf";
 
 interface PdfUploadInputProps {
-  isPendingPdf: boolean;
-  isPendingQuiz: boolean;
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 const PdfUploadInput: React.FC<PdfUploadInputProps> = ({
-  isPendingPdf,
-  isPendingQuiz,
   handleFileChange,
 }) => {
+  const { isPending: isPendingPdf } = useUploadPdf();
+  const { isPending: isPendingQuiz } = useGenerateQuiz();
+
   return (
     <label
       className={`relative w-full h-64 border-2 border-dashed rounded-lg flex items-center justify-center cursor-pointer transition
