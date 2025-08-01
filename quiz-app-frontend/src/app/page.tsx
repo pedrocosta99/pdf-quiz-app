@@ -10,11 +10,11 @@ import PurpleCurve from "@/assets/PurpleCurve.png";
 import Image from "next/image";
 
 export default function UploadPage() {
-  const { mutateAsync: uploadPdf } = useUploadPdf();
-  const { mutateAsync: generateQuiz } = useGenerateQuiz();
+  const { mutateAsync: uploadPdf, isPending: isPendingPdf } = useUploadPdf();
+  const { mutateAsync: generateQuiz, isPending: isPendingQuiz } =
+    useGenerateQuiz();
   const router = useRouter();
-  const { setText, questionCount, setQuestionCount, setQuestions } =
-    useStore();
+  const { setText, questionCount, setQuestionCount, setQuestions } = useStore();
   const [localError, setLocalError] = useState<string | null>(null);
 
   const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +64,11 @@ export default function UploadPage() {
       </section>
 
       <div className="max-w-md w-full bg-white shadow-md rounded-xl p-6 space-y-6">
-        <PdfUploadInput handleFileChange={handleFileChange} />
+        <PdfUploadInput
+          handleFileChange={handleFileChange}
+          isPendingPdf={isPendingPdf}
+          isPendingQuiz={isPendingQuiz}
+        />
 
         <QuestionCountInput
           questionCount={questionCount}
