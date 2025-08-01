@@ -22,14 +22,7 @@ export function ResultSummary({
   };
 
   return (
-    <div
-      className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 text-center space-y-6 border border-gray-100 relative overflow-hidden"
-      style={{
-        backgroundImage: "url('/confetti-bg.png')", // Replace with real path
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
+    <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl shadow-lg p-8 text-center space-y-6 border border-gray-100 relative overflow-hidden">
       <div className="text-5xl">✅</div>
 
       <h2 className="text-xl md:text-2xl font-semibold text-gray-800">
@@ -42,11 +35,11 @@ export function ResultSummary({
 
       <div className="flex items-center justify-center gap-2 px-8">
         <div
-          className="flex-1 h-3 rounded-full bg-green-500"
+          className={`flex-1 h-3 rounded-full bg-green-500 ${percentage == 0 ? 'hidden' : ''}`}
           style={{ width: `${percentage}%` }}
         />
         <div
-          className="flex-1 h-3 rounded-full bg-red-400"
+          className={`flex-1 h-3 rounded-full bg-red-400 ${percentage == 100 ? 'hidden' : ''}`}
           style={{ width: `${100 - percentage}%` }}
         />
       </div>
