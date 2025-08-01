@@ -22,6 +22,9 @@ type MainStore = {
 
   setAnswerIndex: (qIndex: number, answerIndex: number) => void;
 
+  isQuizReady: boolean;
+  setIsQuizReady: (ready: boolean) => void;
+
   reset: () => void;
 };
 
@@ -60,6 +63,9 @@ export const useStore = create<MainStore>((set) => ({
       };
       return { questions: updated };
     }),
+
+    isQuizReady: true,
+    setIsQuizReady: (ready: boolean) => set({ isQuizReady: ready }),
 
     reset: () => set(initialValue),
 }));

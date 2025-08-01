@@ -7,8 +7,13 @@ import PurpleCurve from "@/assets/PurpleCurve.png";
 import Image from "next/image";
 
 export default function ReviewPage() {
-  const { questions, updateQuestionText, updateAnswerText, setQuestions } =
-    useStore();
+  const {
+    questions,
+    updateQuestionText,
+    updateAnswerText,
+    setQuestions,
+    isQuizReady,
+  } = useStore();
   const router = useRouter();
 
   const handleContinue = () => {
@@ -44,7 +49,8 @@ export default function ReviewPage() {
 
         <button
           onClick={handleContinue}
-          className="w-full max-w-xs mx-auto block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded"
+          disabled={!isQuizReady}
+          className="w-full max-w-xs mx-auto block bg-purple-700 hover:bg-purple-800 text-white font-semibold py-3 px-6 rounded disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Start the quiz
         </button>
