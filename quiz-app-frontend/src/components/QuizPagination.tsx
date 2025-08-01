@@ -16,7 +16,7 @@ export function QuizPagination({
       <button
         onClick={onPrevious}
         disabled={current === 0}
-        className="text-sm px-4 py-2 rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
+        className="text-sm px-4 py-2 rounded bg-purple-700 text-white hover:bg-purple-800 disabled:opacity-50"
       >
         Previous
       </button>
@@ -24,7 +24,7 @@ export function QuizPagination({
       <button
         onClick={onNext}
         disabled={current === total - 1}
-        className="text-sm px-4 py-2 rounded bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50"
+        className="text-sm px-4 py-2 rounded bg-purple-700 text-white hover:bg-purple-800 disabled:opacity-50"
       >
         Next
       </button>
