@@ -3,12 +3,14 @@
 import { QuizOptionList } from "@/components/QuizOptionsList";
 import { QuizPagination } from "@/components/QuizPagination";
 import { useStore } from "@/store";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function QuizPage() {
   const { questions, setAnswerIndex } = useStore();
   const [current, setCurrent] = useState(0);
+  const router = useRouter();
+
 
   const q = questions[current];
   const isAnswered = typeof q.userAnswerIndex === "number";
@@ -45,8 +47,8 @@ export default function QuizPage() {
             className={`text-sm ${isCorrect ? "text-green-600" : "text-red-600"}`}
           >
             {isCorrect
-              ? "Resposta correta!"
-              : `Resposta incorreta. Resposta certa: "${q.options[q.correctAnswerIndex]}"`}
+              ? "Right answer!"
+              : `Wrong answer. The right answer is: "${q.options[q.correctAnswerIndex]}"`}
           </p>
         )}
 
