@@ -23,7 +23,7 @@ export default function ReviewPage() {
   return (
     <main className="min-h-screen bg-gray-50 px-4 py-10 flex justify-center">
       <div className="w-full max-w-4xl space-y-6">
-        <h1 className="text-2xl font-semibold text-gray-800">
+        <h1 className="text-2xl font-semibold text-gray-800 flex flex-col md:flex-row justify-center items-center mb-6 gap-2">
           <Image
             src={PurpleCurve}
             alt="Purple Curve"
