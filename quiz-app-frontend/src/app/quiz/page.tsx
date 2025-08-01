@@ -3,6 +3,7 @@
 import { QuizOptionList } from "@/components/QuizOptionsList";
 import { QuizPagination } from "@/components/QuizPagination";
 import { useStore } from "@/store";
+import router from "next/router";
 import { useState } from "react";
 
 export default function QuizPage() {
@@ -13,12 +14,16 @@ export default function QuizPage() {
   const isAnswered = typeof q.userAnswerIndex === "number";
   const isCorrect = q.userAnswerIndex === q.correctAnswerIndex;
 
+  const isAllAnswered = questions.every(
+    (q) => typeof q.userAnswerIndex === "number",
+  );
+
   const handleAnswer = (index: number) => {
     if (!isAnswered) setAnswerIndex(current, index);
   };
 
   return (
-    <main className="min-h-screen flex justify-center items-center bg-gray-50 px-4 py-10">
+    <main className="min-h-screen flex justify-center items-center bg-gray-50 px-4 py-10 flex-col">
       <div className="w-full max-w-xl bg-white shadow-md rounded-xl p-6 space-y-6 border border-gray-200">
         <div>
           <p className="text-sm text-gray-500 mb-1">
@@ -52,6 +57,14 @@ export default function QuizPage() {
           onNext={() => setCurrent(Math.min(questions.length - 1, current + 1))}
         />
       </div>
+
+      <button
+        onClick={() => router.push("/result")}
+        disabled={!isAllAnswered}
+        className="mx-auto mt-8 block text-lg px-6 py-3 rounded-xl bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition disabled:opacity-50"
+      >
+        {isAllAnswered ? "See Results" : "Complete all questions to see results"}
+      </button>
     </main>
   );
 }
