@@ -2,7 +2,7 @@
 
 This full-stack project allows users to upload a PDF, extract its content, and generate an AI-powered multiple-choice quiz. Built with modern technologies such as **FastAPI**, **Next.js**, **TailwindCSS**, **Zustand**, and **React Query**.
 
-👉 **Live Demo:** [https://ai-quiz-generator.vercel.app](https://ai-quiz-generator.vercel.app)
+👉 **Live Demo:** [https://pdf-quiz-app-zeta.vercel.app/](https://pdf-quiz-app-zeta.vercel.app/)
 
 ---
 
@@ -36,12 +36,13 @@ This full-stack project allows users to upload a PDF, extract its content, and g
 
 ### 🔧 Backend (FastAPI)
 
-1. Navigate to the backend folder:
+Don't forget to set your OPENAI_API_KEY in the .env
 
 ```bash
 cd backend
 python3 -m venv venv
 source venv/bin/activate
+OPENAI_API_KEY=yourKey
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
@@ -54,17 +55,17 @@ npm install
 npm run dev
 ```
 
-! Make sure the localhost on frontend matches the one in the backend
+Make sure the localhost on frontend matches the one in the backend when running local!
 
-✅ Features
-  🧾 Upload and parse PDF files
+Features
+- Upload and parse PDF files
 
-  🤖 Generate multiple-choice questions with OpenAI
+- Generate multiple-choice questions with OpenAI
 
-  ✏️ Edit questions and answers before starting quiz
+- Edit questions and answers before starting quiz
 
-  🎯 Interactive quiz experience
+- Interactive quiz experience
 
-  📊 Review results with correct and incorrect answers
+- Review results with correct and incorrect answers
 
-  📱 Responsive and clean UI with Tailwind
+- Responsive and clean UI with Tailwind
