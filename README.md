@@ -27,8 +27,8 @@ This full-stack project allows users to upload a PDF, extract its content, and g
 
 ## 📂 Project Structure
 
-├── backend/ # FastAPI backend
-├── quiz-app-frontend/ # Next.js frontend
+#### backend/ # FastAPI backend
+#### quiz-app-frontend/ # Next.js frontend
 
 ---
 
@@ -43,7 +43,6 @@ cd backend
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
-OPENAI_API_KEY=your-openai-key-here
 uvicorn main:app --reload
 ```
 
@@ -54,6 +53,8 @@ cd quiz-app-frontend
 npm install
 npm run dev
 ```
+
+! Make sure the localhost on frontend matches the one in the backend
 
 ✅ Features
   🧾 Upload and parse PDF files
