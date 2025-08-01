@@ -13,7 +13,7 @@ export default function UploadPage() {
   const { mutateAsync: uploadPdf } = useUploadPdf();
   const { mutateAsync: generateQuiz } = useGenerateQuiz();
   const router = useRouter();
-  const { text, setText, questionCount, setQuestionCount, setQuestions } =
+  const { setText, questionCount, setQuestionCount, setQuestions } =
     useStore();
   const [localError, setLocalError] = useState<string | null>(null);
 
@@ -33,6 +33,7 @@ export default function UploadPage() {
     try {
       const uploadResult = await uploadPdf(file);
       setText(uploadResult.text);
+      const text = useStore.getState().text;
 
       const quizQuestions = await generateQuiz({ text, questionCount });
       setQuestions(quizQuestions);
