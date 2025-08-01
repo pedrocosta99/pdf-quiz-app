@@ -16,6 +16,15 @@ export default function ReviewPage() {
   } = useStore();
   const router = useRouter();
 
+  if (!questions || questions.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <p className="mt-4 text-gray-600 animate-pulse">Loading…</p>
+      </div>
+    );
+  }
+
   const handleContinue = () => {
     router.push("/quiz");
   };
