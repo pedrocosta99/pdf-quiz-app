@@ -21,6 +21,8 @@ type MainStore = {
   updateAnswerText: (qindex: number, aIndex: number, value: string) => void;
 
   setAnswerIndex: (qIndex: number, answerIndex: number) => void;
+
+  reset: () => void;
 };
 
 export const useStore = create<MainStore>((set) => ({
@@ -58,4 +60,6 @@ export const useStore = create<MainStore>((set) => ({
       };
       return { questions: updated };
     }),
+
+    reset: () => set(initialValue),
 }));
