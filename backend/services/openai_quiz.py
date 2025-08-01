@@ -12,13 +12,10 @@ client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 def generate_quiz_from_text(text: str, num_questions: int):
     response = client.responses.create(
       prompt={
-        "id": "pmpt_688b70536f848195b51d13488b7fe2eb077d1b5b922b0d8a",
-        "version": "3",
-        "variables": {
-          "questioncount": str(num_questions),
-          "text": text
-        }
-      }
+        "id": "pmpt_688cd86a74648196b1d6366a7301670e032ae3cfe6eb081e",
+        "version": "1",
+      },
+      input=f"text:{text} questioncount:{num_questions}",
     )
 
     try:
