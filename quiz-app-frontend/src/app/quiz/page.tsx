@@ -11,6 +11,14 @@ export default function QuizPage() {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
 
+  if (!questions || questions.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4">
+        <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin" />
+        <p className="mt-4 text-gray-600 animate-pulse">Loading…</p>
+      </div>
+    );
+  }
 
   const q = questions[current];
   const isAnswered = typeof q.userAnswerIndex === "number";
@@ -65,7 +73,9 @@ export default function QuizPage() {
         disabled={!isAllAnswered}
         className="mx-auto mt-8 block text-lg px-6 py-3 rounded-xl bg-green-600 text-white font-semibold shadow-md hover:bg-green-700 transition disabled:opacity-50"
       >
-        {isAllAnswered ? "See Results" : "Complete all questions to see results"}
+        {isAllAnswered
+          ? "See Results"
+          : "Complete all questions to see results"}
       </button>
     </main>
   );
