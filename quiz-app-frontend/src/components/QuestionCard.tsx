@@ -19,7 +19,7 @@ export function QuestionCard({
   return (
     <div className="bg-white rounded-xl border border-gray-200 p-6 space-y-4 shadow-sm">
       <label className="block text-sm font-semibold text-gray-700">
-        Pergunta {index + 1}
+        Question {index + 1}
       </label>
       <textarea
         className="w-full border rounded px-3 py-2 text-sm"
@@ -29,7 +29,7 @@ export function QuestionCard({
 
       <hr className="border-gray-200" />
 
-      <p className="text-sm font-medium text-gray-700 mt-4">Respostas</p>
+      <p className="text-sm font-medium text-gray-700 mt-4">Options</p>
       <div className="space-y-2 mt-2">
         {questionData.options.map((opt, j) => (
           <AnswerOption

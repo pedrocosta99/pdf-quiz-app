@@ -20,7 +20,7 @@ export function AnswerOption({
       }`}
     >
       <div className="flex-1">
-        <label className="text-sm text-gray-500">Opção {index + 1}</label>
+        <label className="text-sm text-gray-500">Option {index + 1}</label>
         <input
           className="w-full border-none bg-transparent text-sm font-medium text-gray-800 outline-none"
           value={value}
@@ -35,7 +35,7 @@ export function AnswerOption({
             : "text-gray-500 hover:text-green-600"
         }`}
       >
-        {isCorrect ? "✓ Correta" : "Marcar como correta"}
+        {isCorrect ? "✓ Correct answer" : "Mark as correct"}
       </button>
     </div>
   );
