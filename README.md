@@ -1,4 +1,4 @@
-# 🧠 Oleve Take-Home Project: AI-Powered PDF Quiz Generator
+# 🧠 AI-Powered PDF Quiz Generator
 
 This full-stack project allows users to upload a PDF, extract its content, and generate an AI-powered multiple-choice quiz. Built with modern technologies such as **FastAPI**, **Next.js**, **TailwindCSS**, **Zustand**, and **React Query**.
 
